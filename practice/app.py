@@ -1,0 +1,14 @@
+from langchain_groq import ChatGroq
+import streamlit as st
+import os
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_classic.chains.combine_documents import create_stuff_documents_chain
+from langchain_classic.chains import create_retrieval_chain
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_community.vectorstores import FAISS
+from langchain_community.document_loaders import PyPDFLoader
+
+from dotenv import load_dotenv
+load_dotenv()
+
