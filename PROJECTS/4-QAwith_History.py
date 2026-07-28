@@ -49,7 +49,7 @@ if uploaded_files:
         "which might reference context in the chat history"
         "formulate a standalone question which can be understood"
         "without a chat history. Do not answer a question"
-        "just reformulate itif needed otherwise return as is"
+        "just reformulate it if needed, otherwise return as is"
     """
 
     contextualize_q_prompt=ChatPromptTemplate.from_messages([
@@ -78,9 +78,9 @@ if uploaded_files:
     rag_chain=create_retrieval_chain(history_aware_retriever,question_answer_chain)
 
     def get_session_history(session:str)->BaseChatMessageHistory:
-        if session_id not in st.session_state.store:
-            st.session_state.store[session_id]=ChatMessageHistory
-        return st.session_state[session_id]
+        if session not in st.session_state.store:
+            st.session_state.store[session]=ChatMessageHistory()
+        return st.session_state.store[session]
 
     conversational_rag_chain=RunnableWithMessageHistory(
         rag_chain,get_session_history,
